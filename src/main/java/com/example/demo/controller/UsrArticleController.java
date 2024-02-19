@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.demo.service.ArticleService;
 import com.example.demo.service.BoardService;
 import com.example.demo.service.ReactionPointService;
+import com.example.demo.service.ReplyService;
 import com.example.demo.util.Ut;
 import com.example.demo.vo.Article;
 import com.example.demo.vo.Board;
+import com.example.demo.vo.Reply;
 import com.example.demo.vo.ResultData;
 import com.example.demo.vo.Rq;
 
@@ -31,6 +33,9 @@ public class UsrArticleController {
 
 	@Autowired
 	private BoardService boardService;
+
+	@Autowired
+	private ReplyService replyService;
 
 	@Autowired
 	private ReactionPointService reactionPointService;
@@ -78,21 +83,25 @@ public class UsrArticleController {
 
 		return "usr/article/list";
 	}
-	
-	//detail에서는 로그인판단? 추천을 실행시키기위한 로그인판단하는듯?
+
 	@RequestMapping("/usr/article/detail")
 	public String showDetail(HttpServletRequest req, Model model, int id) {
 		Rq rq = (Rq) req.getAttribute("rq");
 
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
-
 		ResultData usersReactionRd = reactionPointService.usersReaction(rq.getLoginedMemberId(), "article", id);
-		
+
 		if (usersReactionRd.isSuccess()) {
 			model.addAttribute("userCanMakeReaction", usersReactionRd.isSuccess());
 		}
 
+		List<Reply> replies = replyService.getForPrintReplies(rq.getLoginedMemberId(), "article", id);
+
+		int repliesCount = replies.size();
+
 		model.addAttribute("article", article);
+		model.addAttribute("replies", replies);
+		model.addAttribute("repliesCount", repliesCount);
 		model.addAttribute("isAlreadyAddGoodRp",
 				reactionPointService.isAlreadyAddGoodRp(rq.getLoginedMemberId(), id, "article"));
 		model.addAttribute("isAlreadyAddBadRp",

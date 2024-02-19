@@ -10,7 +10,7 @@
 	const params = {};
 	params.id = parseInt('${param.id}');
 	params.memberId = parseInt('${loginedMemberId}');
-	//위의 파람스로 받아오는 Uri값을 보기위함.
+	
 	console.log(params);
 	console.log(params.memberId);
 	
@@ -57,8 +57,7 @@
 			return;
 		}
 	}
-	//밑에 좋아요,싫어요 버튼 누를시 로그인을 했는지 확인 후 로그인 페이지로 보냄, 
-	//currentUri가 원래 돌아가려는 Uri고 이 주소값을 arter뒤에 붙여줘서 보냄
+	
 	function doGoodReaction(articleId) {
 		if(isNaN(params.memberId) == true){
 			if(confirm('로그인 해야해. 로그인 페이지로 가실???')){
@@ -236,39 +235,16 @@
 			</c:if>
 		</div>
 	</div>
+</section>
+
+<section class="mt-5 px-3">
+	<div class="mx-auto">
+		<h2>댓글 리스트(${repliesCount })</h2>
+		<div>${replies }</div>
+	</div>
 
 </section>
-	<!-- Comments Form -->
-	<div class="container mx-auto">
-		<div class="form-group">
-			<form method="post" encType="multipart/form-data" action="">
-				<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
-					<tr>
-						<td style="border-bottom: none;" valign="middle">
-							<br>
-							<br>
-						</td>
-						<td>
-							
-							<input type="text" style="text-align: center; " class="flex flex-col w-full mx-auto  textarea textarea-bordered textarea-lg w-full max-w-xs" placeholder="상대방을 존중하는 댓글을 남깁시다."
-								name="commentText">
-								
-						</td>
-						<td>
-							<br>
-							<br>
-							<input type="submit" class="btn btn-primary pull" value="댓글 작성">
-						</td>
-					</tr>
-					<tr>
-						<td colspan="3">
-							<input type="file" name="fileName">
-						</td>
-					</tr>
-				</table>
-			</form>
-		</div>
-	</div>
+
 
 
 <%@ include file="../common/foot.jspf"%>
