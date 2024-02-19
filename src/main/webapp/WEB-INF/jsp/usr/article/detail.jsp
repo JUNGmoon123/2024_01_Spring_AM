@@ -169,6 +169,31 @@
 	});
 </script>
 
+<!-- 댓글 -->
+<script>
+		var ReplyWrite__submitDone = false;
+
+		function ReplyWrite__submit(form) {
+			if (ReplyWrite__submitDone) {
+				alert('이미 처리중입니다');
+				return;
+			}
+			console.log(123);
+			
+			console.log(form.body.value);
+			
+			if (form.body.value.length < 3) {
+				alert('댓글은 3글자 이상 입력해');
+				form.body.focus();
+				return;
+			}
+
+			ReplyWrite__submitDone = true;
+			form.submit();
+
+		}
+	</script>
+
 
 <section class="mt-8 text-xl px-4 ">
 	<div class="">
@@ -239,7 +264,7 @@
 
 <section class="mt-5 px-3">
 	<c:if test="${rq.isLogined() }">
-		<form action="../reply/doWrite" method="POST">
+		<form action="../reply/doWrite" method="POST" onsubmit="ReplyWrite__submit(this); return false;">
 			<input type="hidden" name="relTypeCode" value="article" />
 			<input type="hidden" name="relId" value="${article.id }" />
 			<table class="write-box table-box-1" border="1">
@@ -247,8 +272,8 @@
 					<tr>
 						<th>내용</th>
 						<td>
-							<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="내용을 입력해주세요" name="body" />
+							<textarea class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
+								placeholder="내용을 입력해주세요" name="body"> </textarea>
 						</td>
 					</tr>
 					<tr>
@@ -266,7 +291,37 @@
 	</c:if>
 	<div class="mx-auto">
 		<h2>댓글 리스트(${repliesCount })</h2>
-		<div>${replies }</div>
+		<table class="table-box-1 table" border="1">
+			<colgroup>
+				<col style="width: 10%" />
+				<col style="width: 20%" />
+				<col style="width: 60%" />
+				<col style="width: 10%" />
+			</colgroup>
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>날짜</th>
+					<th>내용</th>
+					<th>작성자</th>
+					<th>좋아요</th>
+					<th>싫어요</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<c:forEach var="reply" items="${replies }">
+					<tr class="hover">
+						<td>${reply.id }</td>
+						<td>${reply.regDate.substring(0,10) }</td>
+						<td>${reply.body }</td>
+						<td>${reply.extra__writer }</td>
+						<td>${reply.goodReactionPoint }</td>
+						<td>${reply.badReactionPoint }</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 	</div>
 
 </section>
