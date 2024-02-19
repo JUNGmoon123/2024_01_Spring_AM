@@ -17,11 +17,11 @@ public class Ut {
 		if (obj == null) {
 			return true;
 		}
-		
+
 		if (obj instanceof Integer) {
 			return (int) obj == 0;
 		}
-		
+
 		if (obj instanceof String) {
 			return ((String) obj).trim().length() == 0;
 		}
@@ -37,7 +37,6 @@ public class Ut {
 		return false;
 	}
 
-	// 자바스크립트 추가
 	public static String jsHistoryBack(String resultCode, String msg) {
 		if (resultCode == null) {
 			resultCode = "";
@@ -58,7 +57,6 @@ public class Ut {
 				""", resultMsg);
 	}
 
-	// history.back() 현재화면에서 뒤로가기/앞으로가기/화면리로딩등 다 할수있다
 	public static String jsReplace(String resultCode, String msg, String replaceUri) {
 		if (resultCode == null) {
 			resultCode = "";
@@ -82,5 +80,5 @@ public class Ut {
 				</script>
 				""", resultMsg, replaceUri);
 	}
-	// location.replace URL을 받아서 그쪽으로 이동시킴
+
 }
