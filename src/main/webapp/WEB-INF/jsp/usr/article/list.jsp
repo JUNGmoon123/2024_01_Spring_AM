@@ -56,7 +56,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	</div>
+
 
 	<!-- 	동적 페이징 -->
 	<div class="pagination flex justify-center mt-3">

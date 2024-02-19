@@ -170,9 +170,9 @@
 </script>
 
 
-<section class="mt-8 text-xl px-4">
-	<div class="mx-auto">
-		<table class="table-box-1" border="1">
+<section class="mt-8 text-xl px-4 ">
+	<div class="">
+		<table class="table-box-1 " border="1">
 			<tbody>
 				<tr>
 					<th>번호</th>
@@ -238,6 +238,32 @@
 </section>
 
 <section class="mt-5 px-3">
+	<c:if test="${rq.isLogined() }">
+		<form action="../reply/doWrite" method="POST">
+			<input type="hidden" name="relTypeCode" value="article" />
+			<input type="hidden" name="relId" value="${article.id }" />
+			<table class="write-box table-box-1" border="1">
+				<tbody>
+					<tr>
+						<th>내용</th>
+						<td>
+							<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
+								placeholder="내용을 입력해주세요" name="body" />
+						</td>
+					</tr>
+					<tr>
+						<th></th>
+						<td>
+							<input class="btn btn-outline btn-info" type="submit" value="댓글 작성" />
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+	</c:if>
+	<c:if test="${!rq.isLogined() }">
+		<a class="btn btn-outline btn-ghost" href="../member/login">LOGIN</a> 하고 댓글 써
+	</c:if>
 	<div class="mx-auto">
 		<h2>댓글 리스트(${repliesCount })</h2>
 		<div>${replies }</div>
