@@ -39,15 +39,22 @@
 				<th>조회수</th>
 				<th>좋아요</th>
 				<th>싫어요</th>
+
 			</tr>
 		</thead>
 		<tbody>
-
 			<c:forEach var="article" items="${articles }">
 				<tr class="hover">
+
 					<td>${article.id }</td>
 					<td>${article.regDate.substring(0,10) }</td>
-					<td><a href="detail?id=${article.id }">${article.title }</a></td>
+					<td>
+						<a href="detail?id=${article.id }">${article.title }
+							<c:if test="${article.extra__repliesCnt > 0 }">
+								<span style="color: red;">[${article.extra__repliesCnt }]</span>
+							</c:if>
+						</a>
+					</td>
 					<td>${article.extra__writer }</td>
 					<td>${article.hitCount }</td>
 					<td>${article.goodReactionPoint }</td>
@@ -56,7 +63,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
-
+	</div>
 
 	<!-- 	동적 페이징 -->
 	<div class="pagination flex justify-center mt-3">

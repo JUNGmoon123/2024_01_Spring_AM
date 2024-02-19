@@ -14,6 +14,8 @@ public class Article {
 	private int memberId;
 	private String title;
 	private String body;
+	
+	private int extra__repliesCnt;
 	private String extra__writer;
 	//update join으로 article테이블에 합류돼서 extra가 아니게됨.
 	private int goodReactionPoint;
