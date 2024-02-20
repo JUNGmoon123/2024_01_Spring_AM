@@ -306,6 +306,8 @@
 					<th>작성자</th>
 					<th>좋아요</th>
 					<th>싫어요</th>
+					<th>수정</th>
+					<th>삭제</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -318,6 +320,17 @@
 						<td>${reply.extra__writer }</td>
 						<td>${reply.goodReactionPoint }</td>
 						<td>${reply.badReactionPoint }</td>
+						<td>
+							<c:if test="${reply.userCanModify }">
+								<a style="white-space: nowrap;" class="btn btn-outline" href="../reply/modify?id=${article.id }">수정</a>
+							</c:if>
+						</td>
+						<td>
+							<c:if test="${reply.userCanDelete }">
+								<a style="white-space: nowrap;" class="btn btn-outline" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;"
+									href="../reply/doDelete?id=${article.id }">삭제</a>
+							</c:if>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
