@@ -25,7 +25,7 @@ public interface ReplyRepository {
 
 	@Insert("""
 				INSERT INTO reply
-				SET regDate = NOW(),
+				SET regDate = NOW(),             
 				updateDate = NOW(),
 				memberId = #{loginedMemberId},
 				relTypeCode = #{relTypeCode},
