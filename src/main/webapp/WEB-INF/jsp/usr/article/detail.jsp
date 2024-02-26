@@ -322,13 +322,16 @@
 						<td>${reply.badReactionPoint }</td>
 						<td>
 							<c:if test="${reply.userCanModify }">
-								<a style="white-space: nowrap;" class="btn btn-outline" href="../reply/modify?id=${article.id }">수정</a>
+<%-- 								<a style="white-space: nowrap;" class="btn btn-outline" href="../reply/modify?id=${article.id }">수정</a> --%>
+								<a style="white-space: nowrap;" class="btn btn-outline" href="../reply/modify?id=${reply.id }">수정</a>
 							</c:if>
 						</td>
 						<td>
 							<c:if test="${reply.userCanDelete }">
-								<a style="white-space: nowrap;" class="btn btn-outline" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;"
-									href="../reply/doDelete?id=${article.id }">삭제</a>
+<!-- 								<a style="white-space: nowrap;" class="btn btn-outline" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" -->
+<%-- 									href="../reply/doDelete?id=${article.id }">삭제</a> --%>
+								<a style="white-space: nowrap;" class="btn btn-outline"
+									onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" href="../reply/doDelete?id=${reply.id }">삭제</a>
 							</c:if>
 						</td>
 					</tr>

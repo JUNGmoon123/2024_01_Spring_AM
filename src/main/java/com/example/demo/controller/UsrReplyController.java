@@ -41,10 +41,10 @@ public class UsrReplyController {
 		Rq rq = (Rq) req.getAttribute("rq");
 
 		if (Ut.isNullOrEmpty(relTypeCode)) {
-			return Ut.jsHistoryBack("F-1", "내용을 입력해주세요");
+			return Ut.jsHistoryBack("F-1", "relTypeCode을 입력해주세요");
 		}
 		if (Ut.isEmpty(relId)) {
-			return Ut.jsHistoryBack("F-2", "내용을 입력해주세요");
+			return Ut.jsHistoryBack("F-2", "relId을 입력해주세요");
 		}
 		if (Ut.isNullOrEmpty(body)) {
 			return Ut.jsHistoryBack("F-3", "내용을 입력해주세요");
@@ -56,6 +56,34 @@ public class UsrReplyController {
 
 		return Ut.jsReplace(writeReplyRd.getResultCode(), writeReplyRd.getMsg(), "../article/detail?id=" + relId);
 
+	}
+
+	@RequestMapping("/usr/reply/doDelete")
+	@ResponseBody
+	public String doDelete(HttpServletRequest req, int id, String replaceUri) {
+		Rq rq = (Rq) req.getAttribute("rq");
+
+		Reply reply = replyService.getReply(id);
+
+		if (reply == null) {
+			return Ut.jsHistoryBack("F-1", Ut.f("%d번 댓글은 존재하지 않습니다", id));
+		}
+
+		ResultData loginedMemberCanDeleteRd = replyService.userCanDelete(rq.getLoginedMemberId(), reply);
+
+		if (loginedMemberCanDeleteRd.isSuccess()) {
+			replyService.deleteReply(id);
+		}
+
+		if (Ut.isNullOrEmpty(replaceUri)) {
+			switch (reply.getRelTypeCode()) {
+			case "article":
+				replaceUri = Ut.f("../article/detail?id=%d", reply.getRelId());
+				break;
+			}
+		}
+
+		return Ut.jsReplace(loginedMemberCanDeleteRd.getResultCode(), loginedMemberCanDeleteRd.getMsg(), replaceUri);
 	}
 
 }
