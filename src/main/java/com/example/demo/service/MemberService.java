@@ -63,5 +63,12 @@ public class MemberService {
 	public Map getMemberByLoginId2(String loginId) {
 		return memberRepository.getMemberByLoginId2(loginId);
 	}
+	
+	public ResultData modify(int loginedMemberId, String loginPw, String name, String nickname, String cellphoneNum,
+			String email) {
+		memberRepository.modify(loginedMemberId, loginPw, name, nickname, cellphoneNum, email);
+		return ResultData.from("S-1", "회원정보 수정 완료");
+	}
+	
 }
 	
