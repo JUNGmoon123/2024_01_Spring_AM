@@ -134,12 +134,18 @@ public class UsrMemberController {
 		return Ut.jsReplace(joinRd.getResultCode(), joinRd.getMsg(), "../member/login");
 	}
 	
+
 	@RequestMapping("/usr/member/myPage")
 	public String showMyPage() {
 
 		return "usr/member/myPage";
 	}
-	
+
+	@RequestMapping("/usr/member/checkPw")
+	public String showCheckPw() {
+
+		return "usr/member/checkPw";
+	}
 	
 	@RequestMapping("/usr/memeber/doPlusJoin")
 	@ResponseBody

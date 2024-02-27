@@ -201,6 +201,7 @@ function toggleModifybtn(replyId) {
 	
 	$('#modify-btn-'+replyId).hide();
 	$('#save-btn-'+replyId).show();
+	$('#save-btn2-'+replyId).show();
 	$('#reply-'+replyId).hide();
 	$('#modify-form-'+replyId).show();
 }
@@ -229,6 +230,7 @@ function doModifyReply(replyId) {
         	$('#reply-'+replyId).text(data);
         	$('#reply-'+replyId).show();
         	$('#save-btn-'+replyId).hide();
+        	$('#save-btn2-'+replyId).hide();
         	$('#modify-btn-'+replyId).show();
         },
         error: function(xhr, status, error) {
@@ -376,6 +378,8 @@ function doModifyReply(replyId) {
 									class="btn btn-outline">수정</button>
 								<button onclick="doModifyReply('${reply.id}');" style="white-space: nowrap; display: none;"
 									id="save-btn-${reply.id }" class="btn btn-outline">저장</button>
+								<button onclick="../article/detail?id=${reply.id }" style="white-space: nowrap; display: none;"
+									id="save-btn2-${reply.id }" class="btn btn-outline">취소</button>
 							</c:if>
 						</td>
 						<td>

@@ -66,7 +66,7 @@ public class ReplyService {
 
 		return ResultData.from("S-1", Ut.f("%d번 댓글을 수정했습니다", reply.getId()));
 	}
-	
+
 	public Reply getReply(int id) {
 		return replyRepository.getReply(id);
 	}
@@ -76,4 +76,7 @@ public class ReplyService {
 		return ResultData.from("S-1", Ut.f("%d번 댓글을 삭제했습니다", id));
 	}
 
+	public void modifyReply(int id, String body) {
+		replyRepository.modifyReply(id, body);
+	}
 }

@@ -28,7 +28,7 @@ public class Rq {
 
 	private HttpServletRequest req;
 	private HttpServletResponse resp;
-
+	
 	public Rq(HttpServletRequest req, HttpServletResponse resp, MemberService memberService) {
 		this.req = req;
 		this.resp = resp;

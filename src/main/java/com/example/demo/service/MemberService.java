@@ -63,5 +63,5 @@ public class MemberService {
 	public Map getMemberByLoginId2(String loginId) {
 		return memberRepository.getMemberByLoginId2(loginId);
 	}
-
 }
+	
