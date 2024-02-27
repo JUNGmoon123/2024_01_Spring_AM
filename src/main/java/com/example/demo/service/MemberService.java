@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,6 +52,16 @@ public class MemberService {
 
 	public Member getMember(int id) {
 		return memberRepository.getMember(id);
+	}
+	
+	public Map join2(String loginId) {
+		Map existsMember = getMemberByLoginId2(loginId);
+
+		return existsMember;
+	}
+	
+	public Map getMemberByLoginId2(String loginId) {
+		return memberRepository.getMemberByLoginId2(loginId);
 	}
 
 }

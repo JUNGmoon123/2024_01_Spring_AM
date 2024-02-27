@@ -1,5 +1,8 @@
 package com.example.demo.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -127,7 +130,31 @@ public class UsrMemberController {
 		}
 
 		Member member = memberService.getMember(joinRd.getData1());
-
+		
 		return Ut.jsReplace(joinRd.getResultCode(), joinRd.getMsg(), "../member/login");
 	}
+	
+	@RequestMapping("/usr/member/myPage")
+	public String showMyPage() {
+
+		return "usr/member/myPage";
+	}
+	
+	
+	@RequestMapping("/usr/memeber/doPlusJoin")
+	@ResponseBody
+	public Map doPlusJoin(String loginId) {
+		Map<String, Object> rs = new HashMap<String, Object>();
+//		ResultData<Integer> joinRd = memberService.join2(loginId);
+		rs = memberService.join2(loginId);
+		if (Ut.isNullOrEmpty(loginId)) {
+			rs.put("msg", "아이디를 입력해주세요.");
+		}
+		if(rs.equals(loginId)) {
+			rs.put("msg", "중복된 아이디입니다.");			
+		}
+		return rs;
+	}
+	
+	
 }

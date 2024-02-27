@@ -1,5 +1,7 @@
 package com.example.demo.repository;
 
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -14,7 +16,14 @@ public interface MemberRepository {
 			WHERE loginId = #{loginId}
 			""")
 	public Member getMemberByLoginId(String loginId);
-
+	
+	@Select("""
+			SELECT loginId
+			FROM `member`
+			WHERE loginId = #{loginId}
+			""")
+	public Map getMemberByLoginId2(String loginId);
+	
 	@Select("""
 			SELECT *
 			FROM `member`
