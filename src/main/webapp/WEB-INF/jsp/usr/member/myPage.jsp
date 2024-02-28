@@ -3,7 +3,11 @@
 <c:set var="pageTitle" value="MYPAGE"></c:set>
 <%@ include file="../common/head.jspf"%>
 
-
+<div>${loginedMember }</div>
+<div>${loginedMember.loginId }</div>
+<div>${rq.loginedMember }</div>
+<div>${rq.loginedMember.loginId }</div>
+<div>${rq.loginedMember.getLoginId() }</div>
 <section class="mt-8 text-xl px-4 ">
 	<div class="">
 		<table class="table-box-1 " border="1">
